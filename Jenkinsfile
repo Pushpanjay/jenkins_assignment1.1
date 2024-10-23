@@ -32,7 +32,8 @@ pipeline{
             steps{
                 sh 'docker build -t my-node-app:1.0 .'
             }
-                 stage("Login to DockerHub") {
+                
+        stage("Login to DockerHub") {
             steps {
                 script {
                     // Login to DockerHub
@@ -48,6 +49,6 @@ pipeline{
                 sh 'docker push pushpanjay/my-node-app:1.0'
             }
         }
-        }
+        
     }
 }
