@@ -1,38 +1,38 @@
-pipeline{
+pipeline {
     agent any 
-    stages{
-        stage("checkout"){
-            steps{
+    stages {
+        stage("Checkout") {
+            steps {
                 checkout scm
             }
         }
 
-        stage ("version check"){
-            steps{
+        stage("Version Check") {
+            steps {
                 sh "node --version"
                 sh "npm --version"
             }
         }
 
-        stage("Test"){
-            steps{
+        stage("Test") {
+            steps {
                 sh 'npm install'
                 sh 'npm test'
-     //         sh 'npx mocha'
             }
         }
 
-        stage("Build"){
-            steps{
+        stage("Build") {
+            steps {
                 sh 'npm run build'
             }
         }
 
-        stage("Build Image" ){
-            steps{
+        stage("Build Image") {
+            steps {
                 sh 'docker build -t my-node-app:1.0 .'
             }
-                
+        }
+
         stage("Login to DockerHub") {
             steps {
                 script {
@@ -49,6 +49,5 @@ pipeline{
                 sh 'docker push pushpanjay/my-node-app:1.0'
             }
         }
-        }   
     }
 }
