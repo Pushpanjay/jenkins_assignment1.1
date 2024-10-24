@@ -50,5 +50,10 @@ pipeline {
                 sh 'docker push pushpanjay/my-node-app:1.0'
             }
         }
+    post{
+        always {
+            sh 'docker logout'
+         }
+      }
     }
 }
